@@ -1,8 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import { errorHandler } from './utils/errorHandler';
 import balanceSheetRoutes from './routes/balanceSheet';
 
 const app = express();
+
+// CORS
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+}));
 
 // Middlewares
 app.use(express.json());
