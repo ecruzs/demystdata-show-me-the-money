@@ -1,6 +1,9 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 
-const XERO_API_URL = 'http://localhost:3000/api.xro/2.0/Reports/BalanceSheet';
+dotenv.config();
+
+const XERO_API_URL = process.env.XERO_API_URL || 'http://localhost:3000/api.xro/2.0/Reports/BalanceSheet';
 
 export const getBalanceSheet = async () => {
   try {

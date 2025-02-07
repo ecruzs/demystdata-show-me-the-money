@@ -2,13 +2,16 @@ import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './utils/errorHandler';
 import balanceSheetRoutes from './routes/balanceSheet';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
 // CORS
 app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
 // Middlewares
