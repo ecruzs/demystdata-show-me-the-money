@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:3001
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - XERO_API_URL=http://mock-xero:3000/api.xro/2.0/Reports/BalanceSheet
+    depends_on:
+      - mock-xero
+
+  mock-xero:
+    image: jaypeng2015/show-me-the-money
+    ports:
+      - "3000:3000"
