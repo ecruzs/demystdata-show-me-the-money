@@ -25,7 +25,9 @@ const useBalanceSheet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<{ Reports: Report[] }>('http://localhost:3001/balancesheet');
+        const response = await axios.get<{ Reports: Report[] }>(
+          `${import.meta.env.VITE_API_URL}/balancesheet`
+        );
         const reportRows = response.data.Reports[0].Rows;
         const extractedRows = extractRows(reportRows);
         setData(extractedRows);

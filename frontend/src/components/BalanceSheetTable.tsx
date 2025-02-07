@@ -10,9 +10,15 @@ const BalanceSheetTable: React.FC<BalanceSheetTableProps> = ({ rows }) => {
     <table className="w-full border-collapse border border-gray-300 table-fixed">
       <thead>
         <tr className="bg-gray-200">
-          <th className="border border-gray-300 px-4 py-2">Title</th>
-          <th className="border border-gray-300 px-4 py-2">Current Period</th>
-          <th className="border border-gray-300 px-4 py-2">Previous Period</th>
+          <th className="border border-gray-300 px-4 py-2" scope="col" aria-label="Title">
+            Title
+          </th>
+          <th className="border border-gray-300 px-4 py-2" scope="col" aria-label="Current Period">
+            Current Period
+          </th>
+          <th className="border border-gray-300 px-4 py-2" scope="col" aria-label="Previous Period">
+            Previous Period
+          </th>
         </tr>
       </thead>
       <tbody>

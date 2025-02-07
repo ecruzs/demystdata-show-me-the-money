@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import useBalanceSheet from './hooks/useBalanceSheet';
-import Section from './components/Section';
+
+const Section = React.lazy(() => import('./components/Section'));
 
 const App: React.FC = () => {
   const { data, loading, error } = useBalanceSheet();
@@ -13,9 +14,12 @@ const App: React.FC = () => {
       <div className="sticky top-0 bg-gray-50 z-0 px-2 py-4 mb-6 shadow-md">
         <h1 className="text-3xl font-bold text-center">Balance Sheet Report</h1>
       </div>
-      {data.map((sectionData, index) => (
-        <Section key={index} section={sectionData.section} rows={sectionData.rows} />
-      ))}
+
+      <Suspense fallback={<div>Loading sections...</div>}>
+        {data.map((sectionData, index) => (
+          <Section key={index} section={sectionData.section} rows={sectionData.rows} />
+        ))}
+      </Suspense>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 export interface Cell {
-  Value: string;
+  Value: string | number;
 }
 
 export interface Row {
-  RowType: string;
+  RowType?: string;
   Title?: string;
   Cells?: Cell[];
   Rows?: Row[];
