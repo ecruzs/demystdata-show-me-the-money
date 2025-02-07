@@ -1,23 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import { Report, Row, SectionData } from '../interfaces/BalanceSheetInterfaces';
 
-interface Cell {
-  Value: string;
-}
-
-interface Row {
-  RowType: string;
-  Title?: string;
-  Cells?: Cell[];
-  Rows?: Row[];
-}
-
-interface Report {
-  Rows: Row[];
-}
-
-const extractRows = (rows: Row[]): { section: string; rows: Row[] }[] => {
-  const result: { section: string; rows: Row[] }[] = [];
+const extractRows = (rows: Row[]): SectionData[] => {
+  const result: SectionData[] = [];
 
   rows.forEach((row) => {
     if (row.RowType === 'Section' && row.Rows) {
@@ -32,7 +18,7 @@ const extractRows = (rows: Row[]): { section: string; rows: Row[] }[] => {
 };
 
 const useBalanceSheet = () => {
-  const [data, setData] = useState<{ section: string; rows: Row[] }[]>([]);
+  const [data, setData] = useState<SectionData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

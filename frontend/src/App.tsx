@@ -1,5 +1,6 @@
 import React from 'react';
 import useBalanceSheet from './hooks/useBalanceSheet';
+import Section from './components/Section';
 
 const App: React.FC = () => {
   const { data, loading, error } = useBalanceSheet();
@@ -8,32 +9,12 @@ const App: React.FC = () => {
   if (error) return <div className="text-red-500 text-center mt-10">{error}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
-      <h1 className="text-3xl font-bold text-center mb-6">Balance Sheet Report</h1>
+    <div className="max-w-4xl mx-auto px-4 py-8 bg-white rounded-lg shadow-lg">
+      <div className="sticky top-0 bg-gray-50 z-0 px-2 py-4 mb-6 shadow-md">
+        <h1 className="text-3xl font-bold text-center">Balance Sheet Report</h1>
+      </div>
       {data.map((sectionData, index) => (
-        <div key={index} className="mb-6 border rounded-lg shadow-sm">
-          <div className="bg-gray-200 px-4 py-2 font-semibold">
-            {sectionData.section}
-          </div>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 px-4 py-2">Title</th>
-                <th className="border border-gray-300 px-4 py-2">Current Period</th>
-                <th className="border border-gray-300 px-4 py-2">Previous Period</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sectionData.rows.map((row, rowIndex) => (
-                <tr key={rowIndex} className="odd:bg-white even:bg-gray-100">
-                  <td className="border border-gray-300 px-4 py-2">{row.Cells?.[0]?.Value}</td>
-                  <td className="border border-gray-300 px-4 py-2">{row.Cells?.[1]?.Value}</td>
-                  <td className="border border-gray-300 px-4 py-2">{row.Cells?.[2]?.Value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Section key={index} section={sectionData.section} rows={sectionData.rows} />
       ))}
     </div>
   );

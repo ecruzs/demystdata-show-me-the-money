@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface Row {
-  Title: string;
-  Amount: number;
-}
+import { Row } from '../interfaces/BalanceSheetInterfaces';
 
 interface BalanceSheetTableProps {
   rows: Row[];
@@ -11,18 +7,20 @@ interface BalanceSheetTableProps {
 
 const BalanceSheetTable: React.FC<BalanceSheetTableProps> = ({ rows }) => {
   return (
-    <table border={1} style={{ width: '100%', textAlign: 'left', marginTop: '20px' }}>
+    <table className="w-full border-collapse border border-gray-300 table-fixed">
       <thead>
-        <tr>
-          <th>Title</th>
-          <th>Amount</th>
+        <tr className="bg-gray-200">
+          <th className="border border-gray-300 px-4 py-2">Title</th>
+          <th className="border border-gray-300 px-4 py-2">Current Period</th>
+          <th className="border border-gray-300 px-4 py-2">Previous Period</th>
         </tr>
       </thead>
       <tbody>
         {rows.map((row, index) => (
-          <tr key={index}>
-            <td>{row.Title}</td>
-            <td>{row.Amount}</td>
+          <tr key={index} className="odd:bg-white even:bg-gray-100">
+            <td className="border border-gray-300 px-4 py-2 truncate">{row.Cells?.[0]?.Value}</td>
+            <td className="border border-gray-300 px-4 py-2">{row.Cells?.[1]?.Value}</td>
+            <td className="border border-gray-300 px-4 py-2">{row.Cells?.[2]?.Value}</td>
           </tr>
         ))}
       </tbody>
